@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>if(sessionStorage.getItem('viagem_auth')!=='ok')location.replace('/');</script>
+<title>Viagem 2026 · Itália · Grécia · Turquia</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#060f1e;--ocean:#0d2137;--deep:#1a3a5c;
+  --italy:#2d6a4f;--greece:#1d3a6b;--turkey:#9b1423;--sea:#0a2240;
+  --gold:#e9c46a;--gold2:#f4a261;--white:#f0f4f8;--muted:#8ba0b8;
+  --border:rgba(255,255,255,0.08);--card:rgba(255,255,255,0.04);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--navy);color:var(--white);line-height:1.6;overflow-x:hidden}
+
+/* ─── NAV ─────────────────────────── */
+nav{
+  position:sticky;top:0;z-index:200;
+  background:rgba(6,15,30,0.92);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;padding:0 1.5rem;gap:0;
+  overflow-x:auto;white-space:nowrap;
+}
+.nav-brand{font-family:'Playfair Display',serif;font-size:.9rem;color:var(--gold);margin-right:2rem;padding:1rem 0;flex-shrink:0}
+nav a{display:inline-block;padding:.85rem 1rem;color:var(--muted);text-decoration:none;font-size:.8rem;font-weight:500;letter-spacing:.03em;border-bottom:2px solid transparent;transition:all .2s;flex-shrink:0}
+nav a:hover{color:var(--white);border-bottom-color:var(--gold)}
+
+/* ─── HERO ───────────────────────── */
+.hero{
+  position:relative;min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:linear-gradient(180deg,#060f1e 0%,#0d2137 40%,#0e2845 100%);
+  overflow:hidden;text-align:center;padding:5rem 2rem 8rem;
+}
+.stars{position:absolute;inset:0;pointer-events:none}
+.star{position:absolute;background:#fff;border-radius:50%;animation:twinkle var(--d,3s) var(--delay,0s) infinite}
+@keyframes twinkle{0%,100%{opacity:.1}50%{opacity:.7}}
+.wave-wrap{position:absolute;bottom:0;left:0;right:0;height:130px;overflow:hidden}
+.wave-svg{width:200%;animation:waveMove var(--speed,8s) linear infinite}
+.wave2{animation-duration:13s;animation-delay:-5s;opacity:.4}
+@keyframes waveMove{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.hero-eyebrow{font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:1.25rem}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5.5vw,4.5rem);line-height:1.1;margin-bottom:.5rem}
+.hero-flags{font-size:1.8rem;letter-spacing:.25rem;margin-bottom:1.5rem}
+.hero-ship{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(255,255,255,.06);border:1px solid var(--border);
+  border-radius:2rem;padding:.4rem 1.2rem;font-size:.8rem;color:var(--muted);margin-bottom:2rem;
+}
+.hero-ship span{color:var(--white);font-weight:500}
+
+/* countdown */
+.countdown{display:flex;justify-content:center;gap:2rem;margin-bottom:2.5rem}
+.cdown-unit{text-align:center}
+.cdown-n{font-family:'Playfair Display',serif;font-size:3.2rem;font-weight:700;color:var(--gold);line-height:1;display:block}
+.cdown-l{font-size:.65rem;text-transform:uppercase;letter-spacing:.15em;color:var(--muted)}
+
+/* travelers */
+.travelers{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap}
+.trav{display:flex;flex-direction:column;align-items:center;gap:.3rem}
+.trav-av{width:3rem;height:3rem;border-radius:50%;background:var(--deep);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+.trav-name{font-size:.7rem;color:var(--muted)}
+
+/* ─── SECTIONS ───────────────────── */
+.section{max-width:1100px;margin:0 auto;padding:4.5rem 1.5rem}
+.sec-label{font-size:.65rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,2.5vw,2.25rem);margin-bottom:2.5rem}
+.sec-bg{background:rgba(255,255,255,.015)}
+
+/* ─── ROUTE DIAGRAM ──────────────── */
+.route-wrap{overflow-x:auto;padding-bottom:1rem}
+.route{display:flex;align-items:center;min-width:900px;padding:1rem 0}
+.route-stop{flex:0 0 auto;text-align:center;width:100px}
+.route-dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--gold);background:var(--navy);margin:0 auto .5rem;position:relative;z-index:1}
+.route-dot.active{background:var(--gold)}
+.route-flag{font-size:1.4rem;display:block;margin-bottom:.3rem}
+.route-city{font-size:.7rem;font-weight:600;color:var(--white)}
+.route-day{font-size:.6rem;color:var(--muted)}
+.route-line{flex:1;height:2px;background:linear-gradient(to right,rgba(233,196,106,.3),rgba(233,196,106,.5),rgba(233,196,106,.3));position:relative}
+.route-line::after{content:'';position:absolute;top:-4px;left:50%;transform:translateX(-50%);font-size:.9rem}
+.route-line.sea::after{content:'🌊'}
+
+/* ─── DAY CARDS ──────────────────── */
+.days-hint{font-size:.7rem;color:var(--muted);display:flex;align-items:center;gap:.5rem;margin-bottom:1rem}
+.days-scroll{display:flex;gap:1rem;overflow-x:auto;padding-bottom:1.5rem;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--deep) transparent}
+.day-card{
+  flex:0 0 270px;scroll-snap-align:start;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:1rem;overflow:hidden;transition:transform .2s,box-shadow .2s;
+}
+.day-card:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.4)}
+.day-card.italy{border-top:3px solid #40916c}
+.day-card.greece{border-top:3px solid #4895ef}
+.day-card.turkey{border-top:3px solid #e63946}
+.day-card.sea{border-top:3px solid #023e8a}
+.dc-head{padding:1rem;background:rgba(0,0,0,.25);display:flex;justify-content:space-between;align-items:flex-start}
+.dc-daynum{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.2rem}
+.dc-date{font-family:'Playfair Display',serif;font-size:1rem}
+.dc-dow{font-size:.65rem;color:var(--muted)}
+.dc-flag{font-size:1.8rem}
+.dc-body{padding:1rem}
+.dc-dest{font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:.15rem;display:flex;align-items:center;gap:.4rem}
+.tender{font-size:.6rem;background:rgba(233,196,106,.15);color:var(--gold);border:1px solid rgba(233,196,106,.3);border-radius:.25rem;padding:.1rem .4rem;vertical-align:middle}
+.dc-country{font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.875rem}
+.dc-times{display:flex;flex-direction:column;gap:.35rem;margin-bottom:.875rem}
+.time-row{display:flex;align-items:center;gap:.4rem;font-size:.775rem}
+.tbadge{border-radius:.25rem;padding:.1rem .45rem;font-weight:600;font-size:.7rem;min-width:3.2rem;text-align:center}
+.tbadge.in{background:rgba(64,145,108,.25);color:#74c69d}
+.tbadge.out{background:rgba(230,57,70,.2);color:#ff9999}
+.tbadge.emb{background:rgba(233,196,106,.2);color:var(--gold)}
+.tbadge.dis{background:rgba(100,150,200,.2);color:#90caf9}
+.dc-hi{border-top:1px solid var(--border);padding-top:.75rem;display:flex;flex-direction:column;gap:.3rem}
+.hi-item{display:flex;gap:.4rem;font-size:.75rem;color:var(--muted)}
+.hi-item .dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:.45em}
+.hi-item.special{color:var(--white)}
+.hi-item.special .dot{background:#4ade80}
+
+/* ─── TIMELINE ───────────────────── */
+.timeline{position:relative;padding-left:1.75rem}
+.timeline::before{content:'';position:absolute;left:.4rem;top:.5rem;bottom:0;width:2px;background:linear-gradient(to bottom,var(--gold),transparent)}
+.tl-item{position:relative;padding-bottom:2rem}
+.tl-dot{position:absolute;left:-1.55rem;top:.25rem;width:.9rem;height:.9rem;border-radius:50%;background:var(--gold);border:2px solid var(--navy);box-shadow:0 0 0 3px rgba(233,196,106,.25)}
+.tl-date{font-size:.65rem;color:var(--gold);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.2rem}
+.tl-title{font-family:'Playfair Display',serif;font-size:1.05rem;margin-bottom:.3rem}
+.tl-body{font-size:.85rem;color:var(--muted);margin-bottom:.5rem}
+.tags{display:flex;flex-wrap:wrap;gap:.3rem}
+.tag{display:inline-flex;align-items:center;gap:.2rem;border-radius:.25rem;padding:.15rem .5rem;font-size:.7rem;font-weight:500}
+.tag.ok{background:rgba(64,145,108,.2);color:#74c69d}
+.tag.warn{background:rgba(230,57,70,.15);color:#ff9999}
+.tag.info{background:rgba(233,196,106,.15);color:var(--gold)}
+
+/* ─── CARDS GRID ─────────────────── */
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.25rem}
+.card{background:var(--card);border:1px solid var(--border);border-radius:.875rem;padding:1.5rem}
+.card-title{font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;color:var(--white)}
+.info-row{display:flex;justify-content:space-between;align-items:flex-start;padding:.45rem 0;border-bottom:1px solid var(--border);font-size:.825rem;gap:1rem}
+.info-row:last-child{border:none}
+.ir-label{color:var(--muted);flex-shrink:0}
+.ir-val{font-weight:500;text-align:right}
+.ir-val.gold{color:var(--gold)}
+.ir-val.green{color:#74c69d}
+.ir-val.blue{color:#90caf9}
+.divider{height:1px;background:linear-gradient(to right,transparent,var(--border),transparent);margin:2rem 0}
+
+/* ticket */
+.ticket{
+  background:linear-gradient(135deg,#0d2a47,#152d4a);
+  border:1px solid rgba(233,196,106,.2);border-radius:.875rem;overflow:hidden;
+}
+.ticket-head{background:rgba(233,196,106,.08);padding:.875rem 1.25rem;border-bottom:1px dashed rgba(233,196,106,.2);display:flex;justify-content:space-between;align-items:center}
+.ticket-route{display:flex;align-items:center;gap:.75rem;font-size:1rem;font-weight:600}
+.ticket-arrow{color:var(--gold);font-size:1.25rem}
+.ticket-body{padding:.875rem 1.25rem;display:grid;grid-template-columns:1fr 1fr;gap:.5rem;font-size:.8rem}
+.ticket-field .tf-label{font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.ticket-field .tf-val{font-weight:500}
+.ticket-code{font-family:monospace;font-size:.95rem;color:var(--gold);letter-spacing:.1em}
+.pax-list{padding:.875rem 1.25rem;border-top:1px dashed rgba(233,196,106,.2);display:flex;flex-direction:column;gap:.3rem}
+.pax{display:flex;align-items:center;gap:.5rem;font-size:.775rem}
+.pax-icon{font-size:.9rem}
+.pax-num{font-size:.65rem;color:var(--muted);margin-left:auto;font-family:monospace}
+
+/* cost table */
+.ctable{width:100%;border-collapse:collapse;font-size:.825rem}
+.ctable th{text-align:left;padding:.65rem .75rem;font-size:.65rem;text-transform:uppercase;letter-spacing:.05em;color:var(--gold);border-bottom:1px solid var(--border)}
+.ctable td{padding:.65rem .75rem;border-bottom:1px solid rgba(255,255,255,.04)}
+.ctable tr:last-child td{border:none}
+.ctable .total td{font-weight:700;border-top:1px solid var(--border);color:var(--gold);font-size:.9rem}
+.dest-badge{display:inline-block;width:.5rem;height:.5rem;border-radius:50%;margin-right:.4rem}
+
+/* checklist */
+.checklist{display:flex;flex-direction:column;gap:.5rem}
+.ci{display:flex;align-items:flex-start;gap:.75rem;padding:.7rem 1rem;border-radius:.5rem;background:rgba(255,255,255,.02);border:1px solid transparent;cursor:pointer;transition:background .15s}
+.ci:hover{background:rgba(255,255,255,.05)}
+.ci input[type=checkbox]{width:1.1rem;height:1.1rem;flex-shrink:0;accent-color:var(--gold);margin-top:.15rem;cursor:pointer}
+.ci-text{font-size:.875rem}
+.ci-who{font-size:.65rem;color:var(--gold);margin-top:.1rem}
+.ci.done{opacity:.45}
+.ci.done .ci-text{text-decoration:line-through}
+
+/* reembolso table */
+.reimb{background:rgba(233,196,106,.05);border:1px solid rgba(233,196,106,.2);border-radius:.75rem;overflow:hidden}
+.reimb table{width:100%;border-collapse:collapse;font-size:.825rem}
+.reimb th{padding:.65rem 1rem;font-size:.65rem;text-transform:uppercase;letter-spacing:.05em;color:var(--gold);border-bottom:1px solid rgba(233,196,106,.15);text-align:left}
+.reimb td{padding:.65rem 1rem;border-bottom:1px solid rgba(255,255,255,.04)}
+.reimb tr:last-child td{border:none}
+.reimb tfoot td{font-weight:700;border-top:1px solid rgba(233,196,106,.2);color:var(--gold)}
+
+/* footer */
+footer{text-align:center;padding:2rem;font-size:.75rem;color:var(--muted);border-top:1px solid var(--border)}
+
+/* ─── DIA A DIA ──────────────────── */
+.daylist{display:flex;flex-direction:column;gap:.6rem}
+.db{background:var(--card);border:1px solid var(--border);border-radius:.875rem;overflow:hidden}
+.db.travel{border-left:3px solid #e9c46a}
+.db.cruise{border-left:3px solid #4895ef}
+.db.rome{border-left:3px solid #40916c}
+.db.transit{border-left:3px solid #a0aec0}
+.db-head{display:flex;justify-content:space-between;align-items:center;padding:.875rem 1.25rem;cursor:pointer;user-select:none;gap:1rem}
+.db-head:hover{background:rgba(255,255,255,.03)}
+.db-left{display:flex;align-items:center;gap:.875rem;flex-wrap:wrap}
+.db-date{font-family:'Playfair Display',serif;font-size:1rem;white-space:nowrap}
+.db-dow{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.db-loc{font-size:.8rem;color:var(--white);opacity:.85}
+.db-right{display:flex;align-items:center;gap:.75rem;flex-shrink:0}
+.db-status{font-size:.7rem;font-weight:600;padding:.2rem .6rem;border-radius:2rem}
+.db-status.ok{background:rgba(64,145,108,.2);color:#74c69d}
+.db-status.warn{background:rgba(230,57,70,.15);color:#ff9999}
+.db-status.info{background:rgba(233,196,106,.15);color:var(--gold)}
+.db-toggle{color:var(--muted);font-size:.75rem;transition:transform .2s}
+.db-toggle.open{transform:rotate(180deg)}
+.db-body{display:none;padding:1rem 1.25rem;border-top:1px solid var(--border)}
+.db-body.open{display:block}
+.act-list{display:flex;flex-direction:column;gap:0}
+.act{display:flex;gap:.875rem;padding:.45rem 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.act:last-child{border:none}
+.act-time{min-width:3.5rem;font-size:.72rem;font-weight:700;color:var(--gold);padding-top:.15rem;white-space:nowrap}
+.act-time.muted{color:var(--muted);font-weight:400}
+.act-body{flex:1}
+.act-title{font-size:.85rem;font-weight:500}
+.act-sub{font-size:.75rem;color:var(--muted);margin-top:.1rem}
+.act-badge{display:inline-flex;align-items:center;gap:.2rem;font-size:.65rem;font-weight:600;padding:.1rem .45rem;border-radius:.25rem;margin-left:.4rem;vertical-align:middle}
+.act-badge.ok{background:rgba(64,145,108,.2);color:#74c69d}
+.act-badge.warn{background:rgba(230,57,70,.15);color:#ff9999}
+.act-badge.info{background:rgba(233,196,106,.15);color:var(--gold)}
+.day-pend{margin-top:.875rem;padding:.75rem;background:rgba(230,57,70,.07);border:1px solid rgba(230,57,70,.2);border-radius:.5rem}
+.day-pend-title{font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:#ff9999;margin-bottom:.4rem;font-weight:600}
+.day-pend-item{font-size:.8rem;color:var(--white);padding:.2rem 0;display:flex;gap:.4rem;align-items:flex-start}
+.day-ok-note{margin-top:.875rem;padding:.6rem .875rem;background:rgba(64,145,108,.08);border:1px solid rgba(64,145,108,.2);border-radius:.5rem;font-size:.775rem;color:#74c69d}
+
+@media(max-width:600px){
+  .countdown{gap:1.2rem}
+  .cdown-n{font-size:2.2rem}
+  .hero-title{font-size:2rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">⚓ Viagem 2026</div>
+  <a href="#roteiro">Roteiro</a>
+  <a href="#cruzeiro">Cruzeiro</a>
+  <a href="#diaadia">Dia a Dia</a>
+  <a href="#logistica">Logística</a>
+  <a href="#financas">Finanças</a>
+  <a href="#pendencias">Pendências</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="topo">
+  <div class="stars" id="stars"></div>
+
+  <div style="position:relative;z-index:1;width:100%">
+    <p class="hero-eyebrow">Carlos · Lívia · Ademar · Rosilaine</p>
+    <h1 class="hero-title">Itália · Grécia · Turquia</h1>
+    <p class="hero-flags">🇮🇹 🇬🇷 🇹🇷</p>
+
+    <div class="hero-ship">
+      🚢 <span>Odyssey of the Seas</span> &nbsp;·&nbsp; Royal Caribbean &nbsp;·&nbsp; 31 mai → 07 jun
+    </div>
+
+    <p style="font-size:.85rem;color:var(--muted);margin-bottom:1.75rem">Partida do Brasil: <strong style="color:var(--white)">28 de maio de 2026</strong> · Voo TAP Portugal 17:10</p>
+
+    <div class="countdown" id="countdown">
+      <div class="cdown-unit"><span class="cdown-n" id="cd-d">—</span><span class="cdown-l">dias</span></div>
+      <div class="cdown-unit"><span class="cdown-n" id="cd-h">—</span><span class="cdown-l">horas</span></div>
+      <div class="cdown-unit"><span class="cdown-n" id="cd-m">—</span><span class="cdown-l">min</span></div>
+      <div class="cdown-unit"><span class="cdown-n" id="cd-s">—</span><span class="cdown-l">seg</span></div>
+    </div>
+
+    <div class="travelers">
+      <div class="trav"><div class="trav-av">👨‍💼</div><span class="trav-name">Carlos</span></div>
+      <div class="trav"><div class="trav-av">👩‍💼</div><span class="trav-name">Lívia</span></div>
+      <div class="trav"><div class="trav-av">🧔</div><span class="trav-name">Ademar</span></div>
+      <div class="trav"><div class="trav-av">👩</div><span class="trav-name">Rosilaine</span></div>
+    </div>
+  </div>
+
+  <div class="wave-wrap">
+    <svg class="wave-svg" viewBox="0 0 1440 120" preserveAspectRatio="none" style="--speed:8s" fill="rgba(13,33,55,0.9)">
+      <path d="M0,60 C180,120 360,0 540,60 C720,120 900,0 1080,60 C1260,120 1440,0 1440,60 L1440,120 L0,120 Z"/>
+    </svg>
+  </div>
+  <div class="wave-wrap">
+    <svg class="wave-svg wave2" viewBox="0 0 1440 120" preserveAspectRatio="none" style="--speed:13s" fill="rgba(6,15,30,0.5)">
+      <path d="M0,40 C200,100 400,0 600,50 C800,100 1000,10 1200,55 C1350,90 1440,30 1440,40 L1440,120 L0,120 Z"/>
+    </svg>
+  </div>
+</div>
+
+<!-- ══════════════ ROTEIRO GERAL ══════════════ -->
+<section class="section" id="roteiro">
+  <p class="sec-label">Visão Geral</p>
+  <h2 class="sec-title">Roteiro Completo</h2>
+
+  <!-- Rota do cruzeiro -->
+  <p class="sec-label" style="margin-bottom:.75rem">Escala do navio</p>
+  <div class="route-wrap" style="margin-bottom:3rem">
+    <div class="route">
+      <div class="route-stop">
+        <div class="route-dot active"></div>
+        <span class="route-flag">🇮🇹</span>
+        <div class="route-city">Civitavecchia</div>
+        <div class="route-day">31 mai · Dia 1</div>
+      </div>
+      <div class="route-line sea"></div>
+      <div class="route-stop">
+        <div class="route-dot"></div>
+        <span class="route-flag">🌊</span>
+        <div class="route-city">Navegação</div>
+        <div class="route-day">01 jun · Dia 2</div>
+      </div>
+      <div class="route-line"></div>
+      <div class="route-stop">
+        <div class="route-dot"></div>
+        <span class="route-flag">🇬🇷</span>
+        <div class="route-city">Santorini</div>
+        <div class="route-day">02 jun · Dia 3</div>
+      </div>
+      <div class="route-line"></div>
+      <div class="route-stop">
+        <div class="route-dot"></div>
+        <span class="route-flag">🇹🇷</span>
+        <div class="route-city">Kusadasi</div>
+        <div class="route-day">03 jun · Dia 4</div>
+      </div>
+      <div class="route-line"></div>
+      <div class="route-stop">
+        <div class="route-dot"></div>
+        <span class="route-flag">🇬🇷</span>
+        <div class="route-city">Mykonos</div>
+        <div class="route-day">04 jun · Dia 5</div>
+      </div>
+      <div class="route-line sea"></div>
+      <div class="route-stop">
+        <div class="route-dot"></div>
+        <span class="route-flag">🌊</span>
+        <div class="route-city">Navegação</div>
+        <div class="route-day">05 jun · Dia 6</div>
+      </div>
+      <div class="route-line"></div>
+      <div class="route-stop">
+        <div class="route-dot"></div>
+        <span class="route-flag">🇮🇹</span>
+        <div class="route-city">Nápoles</div>
+        <div class="route-day">06 jun · Dia 7</div>
+      </div>
+      <div class="route-line"></div>
+      <div class="route-stop">
+        <div class="route-dot active"></div>
+        <span class="route-flag">🇮🇹</span>
+        <div class="route-city">Civitavecchia</div>
+        <div class="route-day">07 jun · Dia 8</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Timeline completa -->
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">Qua, 27 mai</div>
+      <div class="tl-title">Ademar + Rosilaine chegam a Brasília</div>
+      <div class="tl-body">Chegada a Brasília na quarta-feira. Descanso antes do voo internacional na sexta.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">Qui, 28 mai</div>
+      <div class="tl-title">✈️ Saída do Brasil — Voo TAP Portugal BSB → FCO</div>
+      <div class="tl-body">Decolagem 17:10 de Brasília · escala em Lisboa · duração total 14h25m · chegada Roma 29/05 às 12:35</div>
+      <div class="tags">
+        <span class="tag ok">✓ Passagem confirmada · TAP Portugal</span>
+        <span class="tag info">BSB 17:10 → FCO 12:35 (+1 dia)</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">Sex, 29 mai</div>
+      <div class="tl-title">🛬 Chegada Roma Fiumicino → Civitavecchia</div>
+      <div class="tl-body">Chegada Fiumicino 12:35 · despacho e bagagem · Trem 15:12 → Civitavecchia 17:08 (1h56m · 1 conexão em Roma Ostiense)</div>
+      <div class="tags">
+        <span class="tag ok">✓ Trem comprado · Regionale 20677 + 12530</span>
+        <span class="tag info">🚆 ~R$ 120/pessoa</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">Sex–Sáb, 29–30 mai</div>
+      <div class="tl-title">🏨 Civitavecchia — Hotel pré-cruzeiro</div>
+      <div class="tl-body">Estratégia: descanso total, sem turismo. Chegada → hotel → jantar leve → dormir. Hotel perto do porto. Custo: ~R$ 1.600.</div>
+      <div class="tags">
+        <span class="tag ok">✓ Reservado</span>
+        <span class="tag info">~R$ 1.600</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--gold)"></div>
+      <div class="tl-date">Dom, 31 mai — 07 jun</div>
+      <div class="tl-title">🚢 Cruzeiro — Odyssey of the Seas</div>
+      <div class="tl-body">Embarque ao meio-dia em Civitavecchia. 8 dias · Itália · Grécia · Turquia.</div>
+      <div class="tags">
+        <span class="tag ok">✓ Reserva confirmada</span>
+        <span class="tag info">OY 7 Night Greek Isles</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">Dom, 07 jun</div>
+      <div class="tl-title">🚆 Desembarque → Roma Trastevere</div>
+      <div class="tl-body">Desembarque 05:30 · Trem Civitavecchia → Roma Trastevere 08:36 → 09:31</div>
+      <div class="tags">
+        <span class="tag ok">✓ Trem comprado · Reserva SVZHK5</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">07–09 jun</div>
+      <div class="tl-title">🍕 Roma — Flatinrome Trastevere 2</div>
+      <div class="tl-body">Apartamento com jacuzzi no bairro Trastevere. Reservado no Booking.com por Lívia.</div>
+      <div class="tl-body" style="color:#ff9999;font-size:.8rem">⚠ Check-in a partir das 16:00 — trem chega 09:31 — ~6h de espera. Guardar bagagem e explorar Trastevere antes.</div>
+      <div class="tags">
+        <span class="tag ok">✓ Hospedagem reservada</span>
+        <span class="tag warn">Check-in: 16:00 · Check-out: 10:00</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">Ter, 09 jun</div>
+      <div class="tl-title">✈️ Retorno ao Brasil — Voo TAP Portugal FCO → BSB</div>
+      <div class="tl-body">Voo 05:55 (Fiumicino) · escala · chegada Brasília 15:40 · duração 14h45m</div>
+      <div class="tl-body" style="color:#ff9999;font-size:.8rem">🚨 Sair do apartamento ~02:30 da manhã! Fazer check-out na NOITE ANTERIOR (08/06 à noite).</div>
+      <div class="tags">
+        <span class="tag ok">✓ Passagem confirmada · TAP Portugal</span>
+        <span class="tag warn">🚨 Voo 05:55 — sair ~02:30</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════ CRUZEIRO ══════════════ -->
+<div class="sec-bg" id="cruzeiro">
+<section class="section">
+  <p class="sec-label">Odyssey of the Seas · Royal Caribbean</p>
+  <h2 class="sec-title">Os 8 Dias a Bordo</h2>
+
+  <p class="days-hint">← deslize para ver todos os dias →</p>
+
+  <div class="days-scroll">
+
+    <!-- DIA 1 -->
+    <div class="day-card italy">
+      <div class="dc-head">
+        <div><div class="dc-daynum">Dia 1</div><div class="dc-date">31 mai</div><div class="dc-dow">Domingo</div></div>
+        <div class="dc-flag">🇮🇹</div>
+      </div>
+      <div class="dc-body">
+        <div class="dc-dest">Roma · Civitavecchia</div>
+        <div class="dc-country">Itália · Embarque</div>
+        <div class="dc-times">
+          <div class="time-row"><span class="tbadge emb">12:00</span> All aboard ↑ · zarpar</div>
+        </div>
+        <div class="dc-hi">
+          <div class="hi-item special"><div class="dot" style="background:#4ade80"></div>Chegar ao porto 12h–13h</div>
+          <div class="hi-item"><div class="dot"></div>Entregar mala grande no check-in</div>
+          <div class="hi-item"><div class="dot"></div>Levar mochila: docs · remédios · roupa de banho · carregadores</div>
+          <div class="hi-item"><div class="dot"></div>Conhecer o navio · jantar a bordo</div>
+          <div class="hi-item"><div class="dot"></div>1 vinho por pessoa permitido na bagagem</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIA 2 -->
+    <div class="day-card sea">
+      <div class="dc-head">
+        <div><div class="dc-daynum">Dia 2</div><div class="dc-date">01 jun</div><div class="dc-dow">Segunda</div></div>
+        <div class="dc-flag">🌊</div>
+      </div>
+      <div class="dc-body">
+        <div class="dc-dest">Dia de Navegação</div>
+        <div class="dc-country">Mediterrâneo · Mar aberto</div>
+        <div class="dc-times">
+          <div class="time-row"><span class="tbadge" style="background:rgba(100,150,200,.2);color:#90caf9">Todo dia</span> No navio</div>
+        </div>
+        <div class="dc-hi">
+          <div class="hi-item"><div class="dot"></div>Piscinas e deck externo</div>
+          <div class="hi-item"><div class="dot"></div>Shows incluídos · karaokê a bordo</div>
+          <div class="hi-item"><div class="dot"></div>Spa (opcional €60–€120)</div>
+          <div class="hi-item"><div class="dot"></div>Bebidas avulsas ~€9–€12/und</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIA 3 -->
+    <div class="day-card greece">
+      <div class="dc-head">
+        <div><div class="dc-daynum">Dia 3</div><div class="dc-date">02 jun</div><div class="dc-dow">Terça</div></div>
+        <div class="dc-flag">🇬🇷</div>
+      </div>
+      <div class="dc-body">
+        <div class="dc-dest">Santorini <span class="tender">tender</span></div>
+        <div class="dc-country">Grécia · Ilhas Cíclades</div>
+        <div class="dc-times">
+          <div class="time-row"><span class="tbadge in">10:45</span> Gangway ↓ bote</div>
+          <div class="time-row"><span class="tbadge out">22:15</span> Gangway ↑ retorno</div>
+        </div>
+        <div class="dc-hi">
+          <div class="hi-item special"><div class="dot" style="background:#4ade80"></div>Tender boat → Teleférico (compra na hora)</div>
+          <div class="hi-item"><div class="dot"></div>Passeio em Fira</div>
+          <div class="hi-item"><div class="dot"></div>Ônibus para Oia (~€2) · pôr do sol</div>
+          <div class="hi-item"><div class="dot"></div>Jantar em Oia · retorno via teleférico</div>
+          <div class="hi-item"><div class="dot" style="background:#facc15"></div>⚠ Não descer tarde (fila teleférico!)</div>
+          <div class="hi-item" style="color:var(--muted);font-style:italic"><div class="dot" style="background:var(--muted)"></div>Café/almoço: €25–€40</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIA 4 -->
+    <div class="day-card turkey">
+      <div class="dc-head">
+        <div><div class="dc-daynum">Dia 4</div><div class="dc-date">03 jun</div><div class="dc-dow">Quarta</div></div>
+        <div class="dc-flag">🇹🇷</div>
+      </div>
+      <div class="dc-body">
+        <div class="dc-dest">Kusadasi · Éfeso</div>
+        <div class="dc-country">Turquia · Costa Egeia</div>
+        <div class="dc-times">
+          <div class="time-row"><span class="tbadge in">09:30</span> Gangway ↓</div>
+          <div class="time-row"><span class="tbadge out">17:30</span> Gangway ↑</div>
+        </div>
+        <div class="dc-hi">
+          <div class="hi-item special"><div class="dot" style="background:#4ade80"></div>✅ Excursão Viator reservada!</div>
+          <div class="hi-item special"><div class="dot" style="background:#4ade80"></div>Éfeso + Casa da Virgem Maria</div>
+          <div class="hi-item"><div class="dot"></div>Colunas da Biblioteca de Celso</div>
+          <div class="hi-item"><div class="dot"></div>Mercado local · tapetes · especiarias</div>
+          <div class="hi-item" style="color:var(--muted);font-style:italic"><div class="dot" style="background:var(--muted)"></div>Excursão: já paga na Viator #1361037517</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIA 5 -->
+    <div class="day-card greece">
+      <div class="dc-head">
+        <div><div class="dc-daynum">Dia 5</div><div class="dc-date">04 jun</div><div class="dc-dow">Quinta</div></div>
+        <div class="dc-flag">🇬🇷</div>
+      </div>
+      <div class="dc-body">
+        <div class="dc-dest">Mykonos</div>
+        <div class="dc-country">Grécia · Ilhas Cíclades</div>
+        <div class="dc-times">
+          <div class="time-row"><span class="tbadge in">07:30</span> Gangway ↓</div>
+          <div class="time-row"><span class="tbadge out">17:30</span> Gangway ↑</div>
+        </div>
+        <div class="dc-hi">
+          <div class="hi-item"><div class="dot"></div>Little Venice · Moinhos de vento</div>
+          <div class="hi-item"><div class="dot"></div>Ruas de pedra branca · pelicanos</div>
+          <div class="hi-item special"><div class="dot" style="background:#4ade80"></div>Praia: Ornos Beach</div>
+          <div class="hi-item" style="color:var(--muted);font-style:italic"><div class="dot" style="background:var(--muted)"></div>Almoço: €30–€45</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIA 6 -->
+    <div class="day-card sea">
+      <div class="dc-head">
+        <div><div class="dc-daynum">Dia 6</div><div class="dc-date">05 jun</div><div class="dc-dow">Sexta</div></div>
+        <div class="dc-flag">🌊</div>
+      </div>
+      <div class="dc-body">
+        <div class="dc-dest">Dia de Navegação</div>
+        <div class="dc-country">Mar Tirreno · Voltando à Itália</div>
+        <div class="dc-times">
+          <div class="time-row"><span class="tbadge" style="background:rgba(100,150,200,.2);color:#90caf9">Todo dia</span> No navio</div>
+        </div>
+        <div class="dc-hi">
+          <div class="hi-item"><div class="dot"></div>Dia de descanso e relax</div>
+          <div class="hi-item"><div class="dot"></div>Piscina · academia · deck</div>
+          <div class="hi-item"><div class="dot"></div>Shows e entretenimento</div>
+          <div class="hi-item"><div class="dot"></div>Jantar especial a bordo</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIA 7 -->
+    <div class="day-card italy">
+      <div class="dc-head">
+        <div><div class="dc-daynum">Dia 7</div><div class="dc-date">06 jun</div><div class="dc-dow">Sábado</div></div>
+        <div class="dc-flag">🇮🇹</div>
+      </div>
+      <div class="dc-body">
+        <div class="dc-dest">Nápoles</div>
+        <div class="dc-country">Itália · Campânia</div>
+        <div class="dc-times">
+          <div class="time-row"><span class="tbadge in">07:30</span> Gangway ↓</div>
+          <div class="time-row"><span class="tbadge out">17:30</span> Gangway ↑</div>
+        </div>
+        <div class="dc-hi">
+          <div class="hi-item special"><div class="dot" style="background:#4ade80"></div>Ferry 08:35→09:25 (Hidrofólio NLG) ✓</div>
+          <div class="hi-item"><div class="dot"></div>Manhã: Funicular · Centro Capri</div>
+          <div class="hi-item"><div class="dot"></div>Meio-dia: Anacapri · Monte Solaro</div>
+          <div class="hi-item"><div class="dot"></div>Tarde: almoço · passeio</div>
+          <div class="hi-item special"><div class="dot" style="background:#4ade80"></div>Ferry retorno 15:25→16:15 ✓</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIA 8 -->
+    <div class="day-card italy">
+      <div class="dc-head">
+        <div><div class="dc-daynum">Dia 8</div><div class="dc-date">07 jun</div><div class="dc-dow">Domingo</div></div>
+        <div class="dc-flag">🇮🇹</div>
+      </div>
+      <div class="dc-body">
+        <div class="dc-dest">Roma · Civitavecchia</div>
+        <div class="dc-country">Itália · Desembarque</div>
+        <div class="dc-times">
+          <div class="time-row"><span class="tbadge dis">05:30</span> Desembarque ↓</div>
+          <div class="time-row"><span class="tbadge" style="background:rgba(233,196,106,.15);color:var(--gold)">08:36</span> Trem p/ Roma</div>
+        </div>
+        <div class="dc-hi">
+          <div class="hi-item special"><div class="dot" style="background:#4ade80"></div>Trem → Roma Trastevere 09:31</div>
+          <div class="hi-item"><div class="dot"></div>Check-in Flatinrome Trastevere 2</div>
+          <div class="hi-item"><div class="dot"></div>Bairro Trastevere · vielas medievais</div>
+          <div class="hi-item"><div class="dot"></div>Descanso e jantar em Roma</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /days-scroll -->
+</section>
+</div>
+
+<!-- ══════════════ DIA A DIA ══════════════ -->
+<div class="sec-bg" id="diaadia">
+<section class="section">
+  <p class="sec-label">Planejamento detalhado</p>
+  <h2 class="sec-title">Dia a Dia — O que fazer e o que falta</h2>
+
+  <div class="daylist">
+
+    <!-- 27/05 QUA -->
+    <div class="db transit">
+      <div class="db-head" onclick="toggleDb(this)">
+        <div class="db-left">
+          <div><div class="db-date">27 mai · Quarta</div><div class="db-dow">Pré-viagem</div></div>
+          <div class="db-loc">📍 Brasília, Brasil</div>
+        </div>
+        <div class="db-right"><span class="db-status ok">✓ Ok</span><span class="db-toggle">▼</span></div>
+      </div>
+      <div class="db-body">
+        <div class="act-list">
+          <div class="act"><span class="act-time muted">—</span><div class="act-body"><div class="act-title">Ademar + Rosilaine chegam a Brasília <span class="act-badge ok">✓ confirmado</span></div><div class="act-sub">Descanso · aguardando voo de sexta</div></div></div>
+        </div>
+        <div class="day-ok-note">✓ Dia tranquilo — nada pendente.</div>
+      </div>
+    </div>
+
+    <!-- 28/05 QUI -->
+    <div class="db travel">
+      <div class="db-head" onclick="toggleDb(this)">
+        <div class="db-left">
+          <div><div class="db-date">28 mai · Quinta</div><div class="db-dow">Dia de partida ✈️</div></div>
+          <div class="db-loc">🛫 Brasília → Lisboa → Roma Fiumicino</div>
+        </div>
+        <div class="db-right"><span class="db-status ok">✓ Ok</span><span class="db-toggle">▼</span></div>
+      </div>
+      <div class="db-body">
+        <div class="act-list">
+          <div class="act"><span class="act-time">manhã</span><div class="act-body"><div class="act-title">Últimas preparações + check-in online</div><div class="act-sub">Verificar documentos · passaportes · medicamentos · mochila</div></div></div>
+          <div class="act"><span class="act-time">~14:00</span><div class="act-body"><div class="act-title">Saída para o aeroporto de Brasília</div><div class="act-sub">Chegar com 3h de antecedência para voo internacional</div></div></div>
+          <div class="act"><span class="act-time">17:10</span><div class="act-body"><div class="act-title">Voo TAP Portugal BSB → FCO <span class="act-badge ok">✓ confirmado</span></div><div class="act-sub">Escala em Lisboa · duração total 14h25m · 1 vinho por pessoa na bagagem permitido</div></div></div>
+          <div class="act"><span class="act-time muted">→ 29/05</span><div class="act-body"><div class="act-title">Voo em andamento durante a madrugada</div><div class="act-sub">Chegada prevista Roma Fiumicino 12:35 do dia seguinte</div></div></div>
+        </div>
+        <div class="day-ok-note">✓ Voo TAP Portugal confirmado. BSB 17:10 → Lisboa (escala) → FCO 29/05 12:35.</div>
+      </div>
+    </div>
+
+    <!-- 29/05 SEX -->
+    <div class="db travel">
+      <div class="db-head" onclick="toggleDb(this)">
+        <div class="db-left">
+          <div><div class="db-date">29 mai · Sexta</div><div class="db-dow">Chegada na Europa 🛬</div></div>
+          <div class="db-loc">🛬 Roma Fiumicino → Civitavecchia</div>
+        </div>
+        <div class="db-right"><span class="db-status ok">✓ Ok</span><span class="db-toggle">▼</span></div>
+      </div>
+      <div class="db-body">
+        <div class="act-list">
+          <div class="act"><span class="act-time">12:35</span><div class="act-body"><div class="act-title">Chegada Roma Fiumicino <span class="act-badge ok">✓ TAP Portugal</span></div><div class="act-sub">Imigração · retirada de bagagens · câmbio se necessário</div></div></div>
+          <div class="act"><span class="act-time">15:12</span><div class="act-body"><div class="act-title">Trem Fiumicino → Civitavecchia <span class="act-badge ok">✓ comprado</span></div><div class="act-sub">1h56m · 1 conexão em Roma Ostiense · Regionale 20677 + 12530</div></div></div>
+          <div class="act"><span class="act-time">17:08</span><div class="act-body"><div class="act-title">Chegada em Civitavecchia → Hotel Traiano ★★★</div><div class="act-sub">Via Fabio Filzi 1 · jantar leve na cidade · descanso</div></div></div>
+          <div class="act"><span class="act-time">noite</span><div class="act-body"><div class="act-title">Jantar leve · dormir cedo</div><div class="act-sub">Estratégia: sem turismo · só descanso · embarque amanhã não</div></div></div>
+        </div>
+        <div class="day-ok-note">✓ Trem comprado. Chegada confirmada 12:35 FCO → 17:08 Civitavecchia. Hotel Traiano (check-in formal 30/05 às 13h, mas chegada na noite de 29).</div>
+      </div>
+    </div>
+
+    <!-- 30/05 SAB -->
+    <div class="db travel">
+      <div class="db-head" onclick="toggleDb(this)">
+        <div class="db-left">
+          <div><div class="db-date">30 mai · Sábado</div><div class="db-dow">Pré-cruzeiro · Hotel Traiano</div></div>
+          <div class="db-loc">📍 Hotel Traiano ★★★ · Civitavecchia 🇮🇹</div>
+        </div>
+        <div class="db-right"><span class="db-status ok">✓ Ok</span><span class="db-toggle">▼</span></div>
+      </div>
+      <div class="db-body">
+        <div class="act-list">
+          <div class="act"><span class="act-time">13:00+</span><div class="act-body"><div class="act-title">Check-in Hotel Traiano ★★★ <span class="act-badge ok">✓ reservado</span></div><div class="act-sub">Via Fabio Filzi 1 · check-in oficial a partir das 13:00</div></div></div>
+          <div class="act"><span class="act-time muted">tarde</span><div class="act-body"><div class="act-title">Descanso · recuperar do jet lag</div><div class="act-sub">Passeio leve pela cidade se quiser · perto do porto</div></div></div>
+          <div class="act"><span class="act-time muted">tarde</span><div class="act-body"><div class="act-title">Preparar mochila de embarque</div><div class="act-sub">Docs · remédios · roupa de banho · chinelo · carregadores</div></div></div>
+          <div class="act"><span class="act-time">noite</span><div class="act-body"><div class="act-title">Jantar leve · dormir cedo</div><div class="act-sub">Embarque amanhã ao meio-dia · check-out até 10:30</div></div></div>
+        </div>
+        <div class="day-ok-note">✓ Hotel Traiano confirmado. Check-out amanhã até 10:30 · depois ir direto ao porto (embarque 12:00).</div>
+      </div>
+    </div>
+
+    <!-- 31/05 DOM — EMBARQUE -->
+    <div class="db cruise">
+      <div class="db-head" onclick="toggleDb(this)">
+        <div class="db-left">
+          <div><div class="db-date">31 mai · Domingo</div><div class="db-dow">Cruzeiro · Dia 1 🚢</div></div>
+          <div class="db-loc">📍 Civitavecchia → Navio</div>
+        </div>
+        <div class="db-right"><span class="db-status ok">✓ Ok</span><span class="db-toggle">▼</span></div>
+      </div>
+      <div class="db-body">
+        <div class="act-list">
+          <div class="act"><span class="act-time">12:00</span><div class="act-body"><div class="act-title">Chegar ao porto <span class="act-badge ok">✓ reserva confirmada</span></div><div class="act-sub">Entregar mala grande · guardar mochila na mão</div></div></div>
+          <div class="act"><span class="act-time">12:00</span><div class="act-body"><div class="act-title">All aboard — Odyssey of the Seas</div><div class="act-sub">Embarque · conhecer o navio · encontrar a cabine</div></div></div>
+          <div class="act"><span class="act-time">tarde</span><div class="act-body"><div class="act-title">Explorar o navio</div><div class="act-sub">Piscinas · restaurantes · bares · entretenimento</div></div></div>
+          <div class="act"><span class="act-time">noite</span><div class="act-body"><div class="act-title">Jantar a bordo · shows</div><div class="act-sub">Primeira noite no Mediterrâneo · karaokê a bordo</div></div></div>
+        </div>
+        <div class="day-ok-note">✓ Tudo confirmado. Lembrar: 1 vinho por pessoa pode entrar na bagagem.</div>
+      </div>
+    </div>
+
+    <!-- 01/06 SEG — NAVEGAÇÃO -->
+    <div class="db cruise">
+      <div class="db-head" onclick="toggleDb(this)">
+        <div class="db-left">
+          <div><div class="db-date">01 jun · Segunda</div><div class="db-dow">Cruzeiro · Dia 2 🌊</div></div>
+          <div class="db-loc">🌊 Dia de navegação · Mar Mediterrâneo</div>
+        </div>
+        <div class="db-right"><span class="db-status ok">✓ Ok</span><span class="db-toggle">▼</span></div>
+      </div>
+      <div class="db-body">
+        <div class="act-list">
+          <div class="act"><span class="act-time muted">manhã</span><div class="act-body"><div class="act-title">Piscina · deck ao sol</div><div class="act-sub">Relaxar · curtir o navio</div></div></div>
+          <div class="act"><span class="act-time muted">tarde</span><div class="act-body"><div class="act-title">Spa (opcional) · academia</div><div class="act-sub">Spa: €60–€120 · pagar avulso no navio</div></div></div>
+          <div class="act"><span class="act-time muted">noite</span><div class="act-body"><div class="act-title">Shows e entretenimento</div><div class="act-sub">Teatro · karaokê · bares</div></div></div>
+        </div>
+        <div class="day-ok-note">✓ Dia livre — sem pendências.</div>
+      </div>
+    </div>
+
+    <!-- 02/06 TER — SANTORINI -->
+    <div class="db cruise">
+      <div class="db-head" onclick="toggleDb(this)">
+        <div class="db-left">
+          <div><div class="db-date">02 jun · Terça</div><div class="db-dow">Cruzeiro · Dia 3 🇬🇷</div></div>
+          <div class="db-loc">📍 Santorini, Grécia — acesso por tender</div>
+        </div>
+        <div class="db-right"><span class="db-status ok">✓ Ok</span><span class="db-toggle">▼</span></div>
+      </div>
+      <div class="db-body">
+        <div class="act-list">
+          <div class="act"><span class="act-time">10:45</span><div class="act-body"><div class="act-title">Gangway abre ↓</div><div class="act-sub">Tender boat para a ilha · fila — chegar cedo</div></div></div>
+          <div class="act"><span class="act-time">manhã</span><div class="act-body"><div class="act-title">Teleférico em Fira</div><div class="act-sub">Compra na hora · não agendar antecipado</div></div></div>
+          <div class="act"><span class="act-time">tarde</span><div class="act-body"><div class="act-title">Ônibus Fira → Oia (~€2)</div><div class="act-sub">Passear pelas ruas brancas · vielas · lojas</div></div></div>
+          <div class="act"><span class="act-time">por do sol</span><div class="act-body"><div class="act-title">Pôr do sol em Oia 🌅</div><div class="act-sub">Chegar com antecedência · lugar fica lotado</div></div></div>
+          <div class="act"><span class="act-time">noite</span><div class="act-body"><div class="act-title">Jantar em Santorini</div><div class="act-sub">Não descer tarde no teleférico — fila enorme</div></div></div>
+          <div class="act"><span class="act-time">22:15</span><div class="act-body"><div class="act-title">Gangway fecha ↑</div><div class="act-sub">Retornar ao tender com antecedência mínima de 1h30</div></div></div>
+        </div>
+        <div class="day-ok-note">✓ Plano DIY — sem reservas necessárias. Atenção ao horário de retorno.</div>
+      </div>
+    </div>
+
+    <!-- 03/06 QUA — KUSADASI -->
+    <div class="db cruise">
+      <div class="db-head" onclick="toggleDb(this)">
+        <div class="db-left">
+          <div><div class="db-date">03 jun · Quarta</div><div class="db-dow">Cruzeiro · Dia 4 🇹🇷</div></div>
+          <div class="db-loc">📍 Kusadasi / Éfeso, Turquia</div>
+        </div>
+        <div class="db-right"><span class="db-status ok">✓ Ok</span><span class="db-toggle">▼</span></div>
+      </div>
+      <div class="db-body">
+        <div class="act-list">
+          <div class="act"><span class="act-time">09:30</span><div class="act-body"><div class="act-title">Gangway abre ↓</div><div class="act-sub">Saída para excursão</div></div></div>
+          <div class="act"><span class="act-time">manhã</span><div class="act-body"><div class="act-title">Excursão Éfeso — Biblioteca de Celso + Teatro <span class="act-badge ok">✓ Viator #1361037517</span></div><div class="act-sub">Guia privado · sem fila · transporte incluso</div></div></div>
+          <div class="act"><span class="act-time">tarde</span><div class="act-body"><div class="act-title">Casa da Virgem Maria <span class="act-badge ok">✓ inclusa na excursão</span></div><div class="act-sub">Retorno ao porto após a excursão</div></div></div>
+          <div class="act"><span class="act-time">17:30</span><div class="act-body"><div class="act-title">Gangway fecha ↑</div><div class="act-sub">Retornar ao navio antes das 16:00 (1h30 de margem)</div></div></div>
+        </div>
+        <div class="day-ok-note">✓ Excursão paga e confirmada. Dia mais tranquilo — tudo resolvido.</div>
+      </div>
+    </div>
+
+    <!-- 04/06 QUI — MYKONOS -->
+    <div class="db cruise">
+      <div class="db-head" onclick="toggleDb(this)">
+        <div class="db-left">
+          <div><div class="db-date">04 jun · Quinta</div><div class="db-dow">Cruzeiro · Dia 5 🇬🇷</div></div>
+          <div class="db-loc">📍 Mykonos, Grécia</div>
+        </div>
+        <div class="db-right"><span class="db-status ok">✓ Ok</span><span class="db-toggle">▼</span></div>
+      </div>
+      <div class="db-body">
+        <div class="act-list">
+          <div class="act"><span class="act-time">07:30</span><div class="act-body"><div class="act-title">Gangway abre ↓</div><div class="act-sub">Sair cedo — mais tempo na ilha</div></div></div>
+          <div class="act"><span class="act-time">manhã</span><div class="act-body"><div class="act-title">Centro de Mykonos — Little Venice + Moinhos</div><div class="act-sub">Pelicanos · ruas de pedra branca · buganvílias</div></div></div>
+          <div class="act"><span class="act-time">tarde</span><div class="act-body"><div class="act-title">Ornos Beach 🏖</div><div class="act-sub">Táxi ou ônibus local até a praia · ~€10–€15 transporte</div></div></div>
+          <div class="act"><span class="act-time">17:30</span><div class="act-body"><div class="act-title">Gangway fecha ↑</div><div class="act-sub">Retornar ao navio antes das 16:00</div></div></div>
+        </div>
+        <div class="day-ok-note">✓ Plano DIY — sem reservas necessárias.</div>
+      </div>
+    </div>
+
+    <!-- 05/06 SEX — NAVEGAÇÃO -->
+    <div class="db cruise">
+      <div class="db-head" onclick="toggleDb(this)">
+        <div class="db-left">
+          <div><div class="db-date">05 jun · Sexta</div><div class="db-dow">Cruzeiro · Dia 6 🌊</div></div>
+          <div class="db-loc">🌊 Dia de navegação · Mar Tirreno</div>
+        </div>
+        <div class="db-right"><span class="db-status ok">✓ Ok</span><span class="db-toggle">▼</span></div>
+      </div>
+      <div class="db-body">
+        <div class="act-list">
+          <div class="act"><span class="act-time muted">dia</span><div class="act-body"><div class="act-title">Descanso · piscina · deck</div><div class="act-sub">Último dia completo de navegação antes de Nápoles</div></div></div>
+          <div class="act"><span class="act-time muted">tarde</span><div class="act-body"><div class="act-title">Spa (opcional €60–€120) · compras a bordo</div></div></div>
+          <div class="act"><span class="act-time muted">noite</span><div class="act-body"><div class="act-title">Shows · jantar especial · karaokê</div></div></div>
+        </div>
+        <div class="day-ok-note">✓ Dia livre — sem pendências.</div>
+      </div>
+    </div>
+
+    <!-- 06/06 SAB — NAPOLES/CAPRI -->
+    <div class="db cruise">
+      <div class="db-head" onclick="toggleDb(this)">
+        <div class="db-left">
+          <div><div class="db-date">06 jun · Sábado</div><div class="db-dow">Cruzeiro · Dia 7 🇮🇹</div></div>
+          <div class="db-loc">📍 Nápoles → Capri, Itália</div>
+        </div>
+        <div class="db-right"><span class="db-status ok">✓ Ok</span><span class="db-toggle">▼</span></div>
+      </div>
+      <div class="db-body">
+        <div class="act-list">
+          <div class="act"><span class="act-time">07:30</span><div class="act-body"><div class="act-title">Gangway abre ↓</div><div class="act-sub">Ir direto ao porto de balsa — sem demora</div></div></div>
+          <div class="act"><span class="act-time">08:35</span><div class="act-body"><div class="act-title">Ferry Nápoles → Capri <span class="act-badge ok">✓ NLG · Hidrofólio</span></div><div class="act-sub">Duração 50 min</div></div></div>
+          <div class="act"><span class="act-time">09:25</span><div class="act-body"><div class="act-title">Chegada em Capri</div></div></div>
+          <div class="act"><span class="act-time">manhã</span><div class="act-body"><div class="act-title">Funicular até o Centro Capri</div><div class="act-sub">Piazzetta · lojas · vistas</div></div></div>
+          <div class="act"><span class="act-time">meio-dia</span><div class="act-body"><div class="act-title">Anacapri + Monte Solaro (teleférico)</div><div class="act-sub">Vista panorâmica da ilha · ponto mais alto</div></div></div>
+          <div class="act"><span class="act-time">tarde</span><div class="act-body"><div class="act-title">Almoço · passeio · compras</div></div></div>
+          <div class="act"><span class="act-time">15:25</span><div class="act-body"><div class="act-title">Ferry Capri → Nápoles <span class="act-badge ok">✓ NLG · Hidrofólio</span></div><div class="act-sub">Duração 50 min</div></div></div>
+          <div class="act"><span class="act-time">16:15</span><div class="act-body"><div class="act-title">Chegada em Nápoles</div><div class="act-sub">Ir direto ao navio</div></div></div>
+          <div class="act"><span class="act-time">17:30</span><div class="act-body"><div class="act-title">Gangway fecha ↑</div><div class="act-sub">Retornar bem antes — tempo apertado</div></div></div>
+        </div>
+        <div class="day-ok-note">✓ Ferries comprados e confirmados. Atenção ao horário: 15:25 é rígido.</div>
+      </div>
+    </div>
+
+    <!-- 07/06 DOM — DESEMBARQUE + ROMA -->
+    <div class="db rome">
+      <div class="db-head" onclick="toggleDb(this)">
+        <div class="db-left">
+          <div><div class="db-date">07 jun · Domingo</div><div class="db-dow">Desembarque + Roma 🇮🇹</div></div>
+          <div class="db-loc">📍 Civitavecchia → Roma Trastevere</div>
+        </div>
+        <div class="db-right"><span class="db-status warn">⚠ Pendência</span><span class="db-toggle">▼</span></div>
+      </div>
+      <div class="db-body">
+        <div class="act-list">
+          <div class="act"><span class="act-time">05:30</span><div class="act-body"><div class="act-title">Desembarque Civitavecchia</div><div class="act-sub">Retirar bagagem · aguardar horário do trem</div></div></div>
+          <div class="act"><span class="act-time">08:36</span><div class="act-body"><div class="act-title">Trem Civitavecchia → Roma Trastevere <span class="act-badge ok">✓ Reserva SVZHK5</span></div><div class="act-sub">Etruschi Line 4125</div></div></div>
+          <div class="act"><span class="act-time">09:31</span><div class="act-body"><div class="act-title">Chegada Roma Trastevere</div><div class="act-sub">Deixar bagagem na recepção do Flatinrome (check-in só às 16:00)</div></div></div>
+          <div class="act"><span class="act-time">10:00–16:00</span><div class="act-body"><div class="act-title">Explorar Trastevere sem bagagem <span class="act-badge warn">⚠ check-in: 16:00</span></div><div class="act-sub">Vielas medievais · piazzas · gelateria · cafés · almoço no bairro</div></div></div>
+          <div class="act"><span class="act-time">16:00+</span><div class="act-body"><div class="act-title">Check-in Flatinrome Trastevere 2 <span class="act-badge ok">✓ reservado</span></div><div class="act-sub">Apartamento com jacuzzi · bairro Trastevere · descanso</div></div></div>
+          <div class="act"><span class="act-time">noite</span><div class="act-body"><div class="act-title">Jantar — Pianostrada <span class="act-badge warn">⚠ reserva pendente</span></div><div class="act-sub">Restaurante em Roma · reservar com antecedência</div></div></div>
+        </div>
+        <div class="day-pend">
+          <div class="day-pend-title">⚠ O que falta para este dia</div>
+          <div class="day-pend-item">🍽 Reservar restaurante Pianostrada para o jantar</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 08/06 SEG — ROMA -->
+    <div class="db rome">
+      <div class="db-head" onclick="toggleDb(this)">
+        <div class="db-left">
+          <div><div class="db-date">08 jun · Segunda</div><div class="db-dow">Roma — Dia livre 🇮🇹</div></div>
+          <div class="db-loc">📍 Roma, Itália</div>
+        </div>
+        <div class="db-right"><span class="db-status info">Planejar</span><span class="db-toggle">▼</span></div>
+      </div>
+      <div class="db-body">
+        <div class="act-list">
+          <div class="act"><span class="act-time muted">manhã</span><div class="act-body"><div class="act-title">Pontos turísticos — sugestões</div><div class="act-sub">Coliseu · Fórum Romano · Palatino (ingresso recomendado antecipado)</div></div></div>
+          <div class="act"><span class="act-time muted">tarde</span><div class="act-body"><div class="act-title">Fontana di Trevi · Pantheon · Piazza Navona</div><div class="act-sub">Tudo a pé no centro histórico</div></div></div>
+          <div class="act"><span class="act-time muted">noite</span><div class="act-body"><div class="act-title">Jantar em Roma — última noite!</div><div class="act-sub">Trastevere tem ótimas opções ao redor do apartamento</div></div></div>
+          <div class="act"><span class="act-time" style="color:#ff9999">noite</span><div class="act-body"><div class="act-title">Check-out Flatinrome (fazer à noite) <span class="act-badge warn">⚠ voo 05:55 amanhã</span></div><div class="act-sub">Arrumar malas · fazer check-out formal · confirmar táxi para 02:30</div></div></div>
+        </div>
+        <div class="day-pend">
+          <div class="day-pend-title">⚠ O que planejar + CRÍTICO para esta noite</div>
+          <div class="day-pend-item">🏛 Definir o roteiro do dia em Roma (pontos turísticos)</div>
+          <div class="day-pend-item">🎟 Considerar ingresso antecipado para o Coliseu (evitar fila)</div>
+          <div class="day-pend-item" style="color:#ff9999">🚕 Reservar táxi para ~02:30 com destino a Fiumicino</div>
+          <div class="day-pend-item" style="color:#ff9999">📦 Check-out do Flatinrome NA NOITE — voo às 05:55 não dá tempo de manhã</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 09/06 TER — RETORNO -->
+    <div class="db travel">
+      <div class="db-head" onclick="toggleDb(this)">
+        <div class="db-left">
+          <div><div class="db-date">09 jun · Terça</div><div class="db-dow">Retorno ao Brasil ✈️ 🚨 ATENÇÃO</div></div>
+          <div class="db-loc">🛫 Roma Fiumicino 05:55 → Brasília 15:40</div>
+        </div>
+        <div class="db-right"><span class="db-status warn">⚠ Cuidado</span><span class="db-toggle">▼</span></div>
+      </div>
+      <div class="db-body">
+        <div class="act-list">
+          <div class="act"><span class="act-time" style="color:#ff9999">08/06 noite</span><div class="act-body"><div class="act-title">Fazer check-out do Flatinrome na VÉSPERA <span class="act-badge warn">⚠ obrigatório</span></div><div class="act-sub">Check-out até 10:00 — fazer na véspera (08/06 à noite) para não correr risco às 02:30</div></div></div>
+          <div class="act"><span class="act-time" style="color:#ff9999">~02:30</span><div class="act-body"><div class="act-title">Sair do apartamento com as malas</div><div class="act-sub">Táxi pré-agendado para Fiumicino (45–60 min) · confirmar táxi com antecedência</div></div></div>
+          <div class="act"><span class="act-time">05:55</span><div class="act-body"><div class="act-title">Voo TAP Portugal FCO → BSB <span class="act-badge ok">✓ confirmado</span></div><div class="act-sub">Escala · duração total 14h45m</div></div></div>
+          <div class="act"><span class="act-time">15:40</span><div class="act-body"><div class="act-title">Chegada em Brasília 🏠</div></div></div>
+        </div>
+        <div class="day-pend">
+          <div class="day-pend-title">🚨 CRÍTICO — Voo às 05:55</div>
+          <div class="day-pend-item">🚕 Reservar táxi para ~02:30 com destino a Fiumicino (fazer isso com antecedência)</div>
+          <div class="day-pend-item">📦 Fazer check-out formal do Flatinrome na noite de 08/06</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /daylist -->
+</section>
+</div>
+
+<!-- ══════════════ LOGÍSTICA ══════════════ -->
+<section class="section" id="logistica">
+  <p class="sec-label">O que já está resolvido</p>
+  <h2 class="sec-title">Reservas & Logística</h2>
+
+  <div class="grid2" style="margin-bottom:2rem">
+
+    <!-- Cruzeiro cabine -->
+    <div class="card">
+      <div class="card-title">🚢 Cruzeiro — Cabine Ademar + Rosilaine</div>
+      <div class="info-row"><span class="ir-label">Reserva</span><span class="ir-val gold">#1714996</span></div>
+      <div class="info-row"><span class="ir-label">Navio</span><span class="ir-val">Odyssey of the Seas</span></div>
+      <div class="info-row"><span class="ir-label">Cabine</span><span class="ir-val">XB — Varanda Vista Mar</span></div>
+      <div class="info-row"><span class="ir-label">Jantar a bordo</span><span class="ir-val">21:00</span></div>
+      <div class="info-row"><span class="ir-label">Agência</span><span class="ir-val">R11 Marcos Sousa</span></div>
+      <div class="info-row"><span class="ir-label">Passaporte Ademar</span><span class="ir-val blue">GE288129</span></div>
+      <div class="info-row"><span class="ir-label">Passaporte Rosilaine</span><span class="ir-val blue">GE288128</span></div>
+      <div class="info-row"><span class="ir-label">Pagamento</span><span class="ir-val">PIX R$ 1.293,90 + 10× R$ 1.656,77</span></div>
+    </div>
+
+    <!-- Excursão -->
+    <div class="card">
+      <div class="card-title">🏛 Excursão — Éfeso & Casa da Virgem Maria</div>
+      <div class="info-row"><span class="ir-label">Plataforma</span><span class="ir-val">Viator</span></div>
+      <div class="info-row"><span class="ir-label">Reserva</span><span class="ir-val gold">#1361037517</span></div>
+      <div class="info-row"><span class="ir-label">Data</span><span class="ir-val">03/06/2026</span></div>
+      <div class="info-row"><span class="ir-label">Porto</span><span class="ir-val">Kusadasi, Turquia 🇹🇷</span></div>
+      <div class="info-row"><span class="ir-label">Destaque</span><span class="ir-val green">Sem fila · Guia privado</span></div>
+      <div class="info-row"><span class="ir-label">Status</span><span class="ir-val green">✓ Pago e confirmado</span></div>
+      <div style="margin-top:.75rem;font-size:.775rem;color:var(--muted);line-height:1.5">
+        Saída após o gangway (09:30). Retornar antes das 17:30.
+      </div>
+    </div>
+
+    <!-- Hotel Civitavecchia -->
+    <div class="card">
+      <div class="card-title">🏨 Hotel Traiano ★★★ — Civitavecchia</div>
+      <div class="info-row"><span class="ir-label">Endereço</span><span class="ir-val">Via Fabio Filzi 1 · Civitavecchia</span></div>
+      <div class="info-row"><span class="ir-label">Período</span><span class="ir-val">30–31 mai 2026 · 1 noite</span></div>
+      <div class="info-row"><span class="ir-label">Check-in</span><span class="ir-val green">Sáb 30/05 · 13:00–00:00</span></div>
+      <div class="info-row"><span class="ir-label">Check-out</span><span class="ir-val">Dom 31/05 · 07:00–10:30</span></div>
+      <div class="info-row"><span class="ir-label">Custo</span><span class="ir-val gold">~R$ 1.600</span></div>
+      <div class="info-row"><span class="ir-label">Status</span><span class="ir-val green">✓ Reservado</span></div>
+      <div style="margin-top:.75rem;font-size:.775rem;color:var(--muted)">Chegada 29/05 às 17:08 · estratégia: jantar leve → descanso. Check-out até 10:30 no dia 31/05 (embarque ao meio-dia).</div>
+    </div>
+
+    <!-- Hospedagem Roma -->
+    <div class="card">
+      <div class="card-title">🛏 Flatinrome Trastevere 2 — Roma</div>
+      <div class="info-row"><span class="ir-label">Destaque</span><span class="ir-val gold">Jacuzzi in Trastevere ✨</span></div>
+      <div class="info-row"><span class="ir-label">Período</span><span class="ir-val">07–09 jun 2026 · 2 noites</span></div>
+      <div class="info-row"><span class="ir-label">Check-in</span><span class="ir-val" style="color:#ff9999">Dom 07/06 · a partir das <strong>16:00</strong></span></div>
+      <div class="info-row"><span class="ir-label">Check-out</span><span class="ir-val">Ter 09/06 · até <strong>10:00</strong></span></div>
+      <div class="info-row"><span class="ir-label">Plataforma</span><span class="ir-val">Booking.com</span></div>
+      <div class="info-row"><span class="ir-label">Pagamento</span><span class="ir-val">Cartão Lívia (mai/2026)</span></div>
+      <div class="info-row"><span class="ir-label">Status</span><span class="ir-val green">✓ Reservado</span></div>
+      <div style="margin-top:.75rem;padding:.6rem;background:rgba(230,57,70,.07);border:1px solid rgba(230,57,70,.2);border-radius:.4rem;font-size:.75rem;color:#ff9999">
+        ⚠ Trem chega às 09:31 — check-in só às 16:00 (~6h30 de espera). Guardar bagagem na recepção e explorar o bairro.
+      </div>
+      <div style="margin-top:.5rem;padding:.5rem;background:rgba(230,57,70,.07);border:1px solid rgba(230,57,70,.2);border-radius:.4rem;font-size:.75rem;color:#ff9999">
+        🚨 Voo retorno 05:55 — sair ~02:30 · fazer check-out na noite de 08/06!
+      </div>
+    </div>
+
+    <!-- Gorjetas navio -->
+    <div class="card">
+      <div class="card-title">⚓ Conta do Navio & Gorjetas</div>
+      <div class="info-row"><span class="ir-label">Sistema</span><span class="ir-val">Cashless (cartão do navio)</span></div>
+      <div class="info-row"><span class="ir-label">Gorjeta automática</span><span class="ir-val">US$ 16–18 / dia / pessoa</span></div>
+      <div class="info-row"><span class="ir-label">Total estimado (casal · 7 dias)</span><span class="ir-val gold">~R$ 1.260</span></div>
+      <div class="info-row"><span class="ir-label">Pode remover?</span><span class="ir-val">Sim (Guest Services)</span></div>
+      <div class="info-row"><span class="ir-label">Cobrado em</span><span class="ir-val">Fatura final do navio</span></div>
+      <div style="margin-top:.75rem;font-size:.775rem;color:var(--muted)">Tudo (bebidas, cafés, restaurantes pagos, spa) vai acumulando na fatura. Pago no desembarque ou no cartão cadastrado.</div>
+    </div>
+
+    <!-- Água navio -->
+    <div class="card">
+      <div class="card-title">💧 Água a Bordo + Bebidas</div>
+      <div class="info-row"><span class="ir-label">Pacote água</span><span class="ir-val">22 garrafas/cabine</span></div>
+      <div class="info-row"><span class="ir-label">Custo (Ademar+Rosilaine)</span><span class="ir-val gold">R$ 147,50</span></div>
+      <div class="info-row"><span class="ir-label">Pago por</span><span class="ir-val">Lívia</span></div>
+      <div class="divider" style="margin:.75rem 0"></div>
+      <div class="info-row"><span class="ir-label">Pacote bebidas</span><span class="ir-val" style="color:#ff9999">❌ Não comprar</span></div>
+      <div style="margin-top:.5rem;font-size:.75rem;color:var(--muted);line-height:1.5">
+        Estratégia adotada: consumir bebidas em terra (mais barato e gostoso). No navio, avulso quando der vontade. Gorjeta obrigatória torna o pacote inviável neste roteiro.
+      </div>
+    </div>
+
+  </div><!-- /grid2 -->
+
+  <!-- TICKETS DE VÔO -->
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.25rem;margin-bottom:1.25rem">✈️ Passagens Aéreas — TAP Portugal</h3>
+  <div class="grid2" style="margin-bottom:2rem">
+
+    <div class="ticket">
+      <div class="ticket-head">
+        <div class="ticket-route">
+          <span>BSB</span>
+          <span class="ticket-arrow">→</span>
+          <span>FCO</span>
+        </div>
+        <span class="tag ok">Comprado ✓</span>
+      </div>
+      <div class="ticket-body">
+        <div class="ticket-field"><div class="tf-label">Data</div><div class="tf-val">Qui, 28 mai 2026</div></div>
+        <div class="ticket-field"><div class="tf-label">Partida</div><div class="tf-val">17:10 · Brasília (BSB)</div></div>
+        <div class="ticket-field"><div class="tf-label">Chegada</div><div class="tf-val">12:35 (+1d) · Roma FCO</div></div>
+        <div class="ticket-field"><div class="tf-label">Duração</div><div class="tf-val">14h25m · 1 escala</div></div>
+        <div class="ticket-field" style="grid-column:span 2"><div class="tf-label">Escala</div><div class="tf-val">Lisboa (LIS)</div></div>
+        <div class="ticket-field"><div class="tf-label">Companhia</div><div class="tf-val">TAP Portugal</div></div>
+        <div class="ticket-field"><div class="tf-label">Passageiros</div><div class="tf-val">4 pessoas</div></div>
+      </div>
+    </div>
+
+    <div class="ticket">
+      <div class="ticket-head">
+        <div class="ticket-route">
+          <span>FCO</span>
+          <span class="ticket-arrow">→</span>
+          <span>BSB</span>
+        </div>
+        <span class="tag ok">Comprado ✓</span>
+      </div>
+      <div class="ticket-body">
+        <div class="ticket-field"><div class="tf-label">Data</div><div class="tf-val">Ter, 09 jun 2026</div></div>
+        <div class="ticket-field" style="color:#ff9999"><div class="tf-label">Partida</div><div class="tf-val" style="color:#ff9999">05:55 · Roma FCO 🚨</div></div>
+        <div class="ticket-field"><div class="tf-label">Chegada</div><div class="tf-val">15:40 · Brasília (BSB)</div></div>
+        <div class="ticket-field"><div class="tf-label">Duração</div><div class="tf-val">14h45m · 1 escala</div></div>
+        <div class="ticket-field" style="grid-column:span 2"><div class="tf-label">Atenção</div><div class="tf-val" style="color:#ff9999">Sair do apartamento ~02:30 · confirmar táxi com antecedência</div></div>
+        <div class="ticket-field"><div class="tf-label">Companhia</div><div class="tf-val">TAP Portugal</div></div>
+        <div class="ticket-field"><div class="tf-label">Passageiros</div><div class="tf-val">4 pessoas</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TICKETS DE TREM -->
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.25rem;margin-bottom:1.25rem">🚆 Passagens de Trem</h3>
+  <div class="grid2">
+
+    <div class="ticket">
+      <div class="ticket-head">
+        <div class="ticket-route">
+          <span>Fiumicino ✈</span>
+          <span class="ticket-arrow">→</span>
+          <span>Civitavecchia</span>
+        </div>
+        <span class="tag info">Ida</span>
+      </div>
+      <div class="ticket-body">
+        <div class="ticket-field"><div class="tf-label">Data</div><div class="tf-val">Sex, 29 mai 2026</div></div>
+        <div class="ticket-field"><div class="tf-label">Saída</div><div class="tf-val">15:12</div></div>
+        <div class="ticket-field"><div class="tf-label">Chegada</div><div class="tf-val">17:08</div></div>
+        <div class="ticket-field"><div class="tf-label">Duração</div><div class="tf-val">1h56m · 1 conexão</div></div>
+        <div class="ticket-field" style="grid-column:span 2"><div class="tf-label">Conexão</div><div class="tf-val">Roma Ostiense (10 min) · Regionale 20677 + 12530</div></div>
+        <div class="ticket-field"><div class="tf-label">Passageiros</div><div class="tf-val">4 pessoas</div></div>
+        <div class="ticket-field"><div class="tf-label">Custo</div><div class="tf-val">~R$ 120/pessoa</div></div>
+      </div>
+    </div>
+
+    <div class="ticket">
+      <div class="ticket-head">
+        <div class="ticket-route">
+          <span>Civitavecchia</span>
+          <span class="ticket-arrow">→</span>
+          <span>Roma Trastevere</span>
+        </div>
+        <span class="tag ok">Comprado ✓</span>
+      </div>
+      <div class="ticket-body">
+        <div class="ticket-field"><div class="tf-label">Data</div><div class="tf-val">Dom, 07 jun 2026</div></div>
+        <div class="ticket-field"><div class="tf-label">Saída</div><div class="tf-val">08:36</div></div>
+        <div class="ticket-field"><div class="tf-label">Chegada</div><div class="tf-val">09:31</div></div>
+        <div class="ticket-field"><div class="tf-label">Trem</div><div class="tf-val">Etruschi Line 4125</div></div>
+        <div class="ticket-field"><div class="tf-label">Reserva</div><div class="ticket-code tf-val">SVZHK5</div></div>
+        <div class="ticket-field"><div class="tf-label">Classe</div><div class="tf-val">Segunda Classe</div></div>
+      </div>
+      <div class="pax-list">
+        <div class="pax"><span class="pax-icon">👨‍💼</span> Carlos Augusto Costa <span class="pax-num">2786945055</span></div>
+        <div class="pax"><span class="pax-icon">👩‍💼</span> Lívia Carvalho <span class="pax-num">2786945057</span></div>
+        <div class="pax"><span class="pax-icon">🧔</span> Ademar Pereira <span class="pax-num">2786945054</span></div>
+        <div class="pax"><span class="pax-icon">👩</span> Rosilaine Maria da Silva Pereira <span class="pax-num">2786945056</span></div>
+      </div>
+    </div>
+
+  </div><!-- /grid2 tickets -->
+
+  <!-- FERRY CAPRI -->
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.25rem;margin:2rem 0 1.25rem">⛴ Ferry Nápoles ↔ Capri</h3>
+  <div class="grid2">
+    <div class="ticket">
+      <div class="ticket-head">
+        <div class="ticket-route">
+          <span>Nápoles</span>
+          <span class="ticket-arrow">→</span>
+          <span>Capri</span>
+        </div>
+        <span class="tag ok">Comprado ✓</span>
+      </div>
+      <div class="ticket-body">
+        <div class="ticket-field"><div class="tf-label">Data</div><div class="tf-val">Sáb, 06 jun 2026</div></div>
+        <div class="ticket-field"><div class="tf-label">Saída</div><div class="tf-val">08:35</div></div>
+        <div class="ticket-field"><div class="tf-label">Chegada</div><div class="tf-val">09:25</div></div>
+        <div class="ticket-field"><div class="tf-label">Operadora</div><div class="tf-val">NLG · Hidrofólio</div></div>
+        <div class="ticket-field" style="grid-column:span 2"><div class="tf-label">Nota</div><div class="tf-val">Sair do navio 07:30 → porto → ferry 08:35</div></div>
+      </div>
+    </div>
+    <div class="ticket">
+      <div class="ticket-head">
+        <div class="ticket-route">
+          <span>Capri</span>
+          <span class="ticket-arrow">→</span>
+          <span>Nápoles</span>
+        </div>
+        <span class="tag ok">Comprado ✓</span>
+      </div>
+      <div class="ticket-body">
+        <div class="ticket-field"><div class="tf-label">Data</div><div class="tf-val">Sáb, 06 jun 2026</div></div>
+        <div class="ticket-field"><div class="tf-label">Saída</div><div class="tf-val">15:25</div></div>
+        <div class="ticket-field"><div class="tf-label">Chegada</div><div class="tf-val">16:15</div></div>
+        <div class="ticket-field"><div class="tf-label">Operadora</div><div class="tf-val">NLG · Hidrofólio</div></div>
+        <div class="ticket-field" style="grid-column:span 2"><div class="tf-label">Atenção</div><div class="tf-val">Gangway fecha 17:30 — retorno com folga ✓</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REGRAS & MALA -->
+  <div class="grid2" style="margin-top:2rem">
+    <div class="card">
+      <div class="card-title">🚨 Regras Importantes do Navio</div>
+      <div class="info-row"><span class="ir-label">Retorno ao navio</span><span class="ir-val" style="color:#ff9999">1h30 antes do gangway ↑</span></div>
+      <div class="info-row"><span class="ir-label">Cartão do navio</span><span class="ir-val">Levar SEMPRE em terra</span></div>
+      <div class="info-row"><span class="ir-label">Ferries / tender</span><span class="ir-val">Chegar cedo · fila grande</span></div>
+      <div class="info-row"><span class="ir-label">Não proibido</span><span class="ir-val">Deixar tudo pro último dia</span></div>
+    </div>
+    <div class="card">
+      <div class="card-title">🧳 O que pode e não pode levar</div>
+      <div class="info-row"><span class="ir-label" style="color:#74c69d">✓ Permitido</span><span class="ir-val">1 vinho por pessoa · adaptador · remédios</span></div>
+      <div class="info-row"><span class="ir-label" style="color:#ff9999">✗ Proibido</span><span class="ir-val">Ferro · extensão · bebidas extras · drone</span></div>
+      <div style="margin-top:.875rem">
+        <div style="font-size:.7rem;color:var(--gold);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem">Mochila de embarque (obrigatória)</div>
+        <div style="display:flex;flex-wrap:wrap;gap:.35rem">
+          <span class="tag info">📄 Documentos</span>
+          <span class="tag info">💊 Remédios</span>
+          <span class="tag info">👙 Roupa de banho</span>
+          <span class="tag info">🩴 Chinelo</span>
+          <span class="tag info">🔌 Carregadores</span>
+        </div>
+        <div style="font-size:.7rem;color:var(--gold);text-transform:uppercase;letter-spacing:.1em;margin:1rem 0 .5rem">Compras essenciais</div>
+        <div style="display:flex;flex-wrap:wrap;gap:.35rem">
+          <span class="tag">🔌 Adaptador universal</span>
+          <span class="tag">📱 eSIM Europa</span>
+          <span class="tag">💰 €200–300/pessoa</span>
+          <span class="tag">🎒 Mochila passeio</span>
+          <span class="tag">👜 Doleira</span>
+          <span class="tag">☀️ Protetor solar</span>
+          <span class="tag">🔋 Power bank</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══════════════ FINANÇAS ══════════════ -->
+<div class="sec-bg" id="financas">
+<section class="section">
+  <p class="sec-label">Dinheiro</p>
+  <h2 class="sec-title">Finanças da Viagem</h2>
+
+  <div class="grid2" style="margin-bottom:2.5rem">
+
+    <div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:1rem">Estimativa de gastos em terra</h3>
+      <table class="ctable">
+        <thead>
+          <tr>
+            <th>Destino</th>
+            <th>O que cobre</th>
+            <th style="text-align:right">Estimativa/pessoa</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="dest-badge" style="background:#40916c"></span>Civitavecchia</td>
+            <td>Trem Roma → Porto</td>
+            <td style="text-align:right">€15–€25</td>
+          </tr>
+          <tr>
+            <td><span class="dest-badge" style="background:#023e8a"></span>Navegação</td>
+            <td>Bebidas avulsas</td>
+            <td style="text-align:right">€10–€25/drink</td>
+          </tr>
+          <tr>
+            <td><span class="dest-badge" style="background:#4895ef"></span>Santorini</td>
+            <td>Alimentação + compras</td>
+            <td style="text-align:right">€45–€90</td>
+          </tr>
+          <tr>
+            <td><span class="dest-badge" style="background:#e63946"></span>Kusadasi</td>
+            <td>Compras (excursão paga)</td>
+            <td style="text-align:right">€20–€40</td>
+          </tr>
+          <tr>
+            <td><span class="dest-badge" style="background:#4895ef"></span>Mykonos</td>
+            <td>Transporte + almoço</td>
+            <td style="text-align:right">€40–€60</td>
+          </tr>
+          <tr>
+            <td><span class="dest-badge" style="background:#023e8a"></span>Navegação</td>
+            <td>Spa (opcional)</td>
+            <td style="text-align:right">€60–€120</td>
+          </tr>
+          <tr>
+            <td><span class="dest-badge" style="background:#40916c"></span>Nápoles</td>
+            <td>Excursão Capri + almoço</td>
+            <td style="text-align:right">€150–€210</td>
+          </tr>
+          <tr>
+            <td><span class="dest-badge" style="background:#40916c"></span>Desembarque</td>
+            <td>Trem Porto → Roma</td>
+            <td style="text-align:right">já pago</td>
+          </tr>
+          <tr class="total">
+            <td colspan="2"><strong>Total estimado por pessoa</strong></td>
+            <td style="text-align:right"><strong>€420–€560</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <!-- Resumo financeiro total -->
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:1rem">Resumo — Custos Fixos (por casal)</h3>
+      <div class="card" style="margin-bottom:1.25rem">
+        <div class="info-row"><span class="ir-label">Cruzeiro</span><span class="ir-val gold">R$ 16.410 <small style="font-weight:400;color:var(--muted)">(R$ 8.205/pessoa)</small></span></div>
+        <div class="info-row"><span class="ir-label">Passagens aéreas</span><span class="ir-val">~R$ 9.200 <small style="font-weight:400;color:var(--muted)">(R$ 4.600/pessoa)</small></span></div>
+        <div class="info-row"><span class="ir-label">Hotel Civitavecchia</span><span class="ir-val">R$ 1.600</span></div>
+        <div class="info-row"><span class="ir-label">Gorjetas cruzeiro</span><span class="ir-val">~R$ 1.260</span></div>
+        <div class="info-row"><span class="ir-label">Passeios + bebidas</span><span class="ir-val">~R$ 1.700</span></div>
+        <div class="info-row"><span class="ir-label">Internet (eSIM)</span><span class="ir-val">~R$ 500</span></div>
+        <div class="info-row"><span class="ir-label">Seguro viagem</span><span class="ir-val">~R$ 300</span></div>
+        <div class="info-row"><span class="ir-label">Gastos em terra</span><span class="ir-val">~R$ 4.000</span></div>
+        <div class="info-row" style="border-top:1px solid var(--gold);margin-top:.5rem"><span class="ir-label" style="font-weight:700;color:var(--white)">TOTAL estimado</span><span class="ir-val gold" style="font-size:1.05rem;font-weight:700">~R$ 35.000</span></div>
+        <div style="font-size:.7rem;color:var(--muted);margin-top:.5rem">por casal · planejamento 98% completo</div>
+      </div>
+
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:1rem">Seguro Viagem</h3>
+      <div class="card" style="margin-bottom:1rem">
+        <div class="card-title">🛡 Universal Assistance UA 60</div>
+        <div class="info-row"><span class="ir-label">Período</span><span class="ir-val">28/05 → 09/06/2026</span></div>
+        <div class="info-row"><span class="ir-label">Destinos</span><span class="ir-val">Itália · Turquia · Grécia</span></div>
+        <div class="info-row"><span class="ir-label">Despesas médicas</span><span class="ir-val green">US$ 60.000</span></div>
+        <div class="info-row"><span class="ir-label">Extravio de bagagem</span><span class="ir-val">US$ 1.300</span></div>
+        <div class="info-row"><span class="ir-label">Preço (2 pessoas)</span><span class="ir-val gold">R$ 203,44 PIX</span></div>
+        <div class="info-row"><span class="ir-label">Site</span><span class="ir-val">assistentedeviagem.com.br</span></div>
+      </div>
+      <div class="card" style="background:rgba(193,18,31,.08);border-color:rgba(193,18,31,.2)">
+        <div style="font-size:.775rem;color:var(--muted);line-height:1.6">
+          <strong style="color:var(--white)">⚠ Ademar — Ourocard Visa Infinite:</strong><br>
+          Pode ter cobertura <strong style="color:var(--gold)">SE</strong> a passagem aérea for paga com este cartão.
+          Emitir apólice no <em>Visa Benefits Portal</em> antes de embarcar.
+          Levar apólice impressa (imigração pode pedir).
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Reembolsos -->
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:1rem">💸 A reembolsar para Lívia</h3>
+  <p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">Pix Lívia: <strong style="color:var(--white);font-family:monospace">61981889546</strong></p>
+  <div class="reimb">
+    <table>
+      <thead>
+        <tr><th>Item</th><th>Quem deve</th><th style="text-align:right">Valor</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Passagem trem (ida + volta)</td>
+          <td>Ademar + Rosilaine</td>
+          <td style="text-align:right">R$ 240,00</td>
+        </tr>
+        <tr>
+          <td>Pacote de água (navio)</td>
+          <td>Ademar + Rosilaine</td>
+          <td style="text-align:right">R$ 147,50</td>
+        </tr>
+        <tr>
+          <td>Hospedagem Roma pós-cruzeiro</td>
+          <td>Todos (divisão a combinar)</td>
+          <td style="text-align:right">a confirmar</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="2"><strong>Total já confirmado (Ademar + Rosilaine)</strong></td>
+          <td style="text-align:right"><strong>R$ 387,50</strong></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+</section>
+</div>
+
+<!-- ══════════════ PENDÊNCIAS ══════════════ -->
+<section class="section" id="pendencias">
+  <p class="sec-label">O que falta resolver</p>
+  <h2 class="sec-title">Lista de Pendências</h2>
+
+  <div class="checklist" id="checklist">
+
+    <!-- ✅ CONCLUÍDOS -->
+    <label class="ci done" data-id="p1">
+      <input type="checkbox" checked onchange="markDone(this)">
+      <div>
+        <div class="ci-text">✈️ Passagem aérea Brasil → Roma (Fiumicino)</div>
+        <div class="ci-who">Carlos + Lívia + Ademar + Rosilaine · Confirmada</div>
+      </div>
+    </label>
+
+    <label class="ci done" data-id="p2">
+      <input type="checkbox" checked onchange="markDone(this)">
+      <div>
+        <div class="ci-text">✈️ Passagem aérea Roma → Brasil (retorno ~09/06)</div>
+        <div class="ci-who">Carlos + Lívia + Ademar + Rosilaine · Confirmada</div>
+      </div>
+    </label>
+
+    <label class="ci done" data-id="p3">
+      <input type="checkbox" checked onchange="markDone(this)">
+      <div>
+        <div class="ci-text">📅 Carlos: confirmar férias (31/05 · 20 dias)</div>
+        <div class="ci-who">Confirmado</div>
+      </div>
+    </label>
+
+    <label class="ci done" data-id="p4">
+      <input type="checkbox" checked onchange="markDone(this)">
+      <div>
+        <div class="ci-text">🚢 Carlos + Lívia: reserva de cabine no cruzeiro</div>
+        <div class="ci-who">Confirmado · Agência Esperança Turismo</div>
+      </div>
+    </label>
+
+    <label class="ci done" data-id="p6">
+      <input type="checkbox" checked onchange="markDone(this)">
+      <div>
+        <div class="ci-text">🏨 Hotel em Civitavecchia pré-cruzeiro (perto do porto)</div>
+        <div class="ci-who">Confirmado · ~R$ 1.600</div>
+      </div>
+    </label>
+
+    <label class="ci done" data-id="p8">
+      <input type="checkbox" checked onchange="markDone(this)">
+      <div>
+        <div class="ci-text">🛂 Verificar validade dos passaportes</div>
+        <div class="ci-who">Confirmado · válidos até pelo menos 09/12/2026</div>
+      </div>
+    </label>
+
+    <label class="ci done" data-id="p9">
+      <input type="checkbox" checked onchange="markDone(this)">
+      <div>
+        <div class="ci-text">🔌 Comprar tomada universal</div>
+        <div class="ci-who">Confirmado</div>
+      </div>
+    </label>
+
+    <label class="ci done" data-id="p10">
+      <input type="checkbox" checked onchange="markDone(this)">
+      <div>
+        <div class="ci-text">👟 Comprar sapatilha aquática para passeios</div>
+        <div class="ci-who">Confirmado · Rosilaine</div>
+      </div>
+    </label>
+
+    <label class="ci done" data-id="p11">
+      <input type="checkbox" checked onchange="markDone(this)">
+      <div>
+        <div class="ci-text">💸 Ademar + Rosilaine: reembolsar Lívia (trem + água navio)</div>
+        <div class="ci-who">Reembolsado ✓ · Pix Lívia: 61981889546</div>
+      </div>
+    </label>
+
+    <label class="ci done" data-id="p12">
+      <input type="checkbox" checked onchange="markDone(this)">
+      <div>
+        <div class="ci-text">🚆 Trem IDA Fiumicino → Civitavecchia (29/05 · 4 passageiros)</div>
+        <div class="ci-who">Confirmado · saída 15:12 · via Omio</div>
+      </div>
+    </label>
+
+    <!-- ⏳ PENDENTES -->
+    <label class="ci" data-id="p5">
+      <input type="checkbox" onchange="markDone(this)">
+      <div>
+        <div class="ci-text">🛡 Contratar seguro viagem (29/05 → 09/06 · Itália · Turquia · Grécia)</div>
+        <div class="ci-who">Todos · UA 60 via assistentedeviagem.com.br · R$ 203,44/casal PIX</div>
+      </div>
+    </label>
+
+    <label class="ci" data-id="p7">
+      <input type="checkbox" onchange="markDone(this)">
+      <div>
+        <div class="ci-text">💳 Ademar: emitir apólice do seguro no Visa Benefits Portal</div>
+        <div class="ci-who">Ademar · Obrigatório SE pagar passagem com Ourocard Visa Infinite · Levar impresso</div>
+      </div>
+    </label>
+
+    <label class="ci" data-id="p14">
+      <input type="checkbox" onchange="markDone(this)">
+      <div>
+        <div class="ci-text">💶 Separar €200–300 em espécie por pessoa</div>
+        <div class="ci-who">Todos · para transporte local, cafés e pequenas compras em terra</div>
+      </div>
+    </label>
+
+    <label class="ci" data-id="p15">
+      <input type="checkbox" onchange="markDone(this)">
+      <div>
+        <div class="ci-text">🎒 Organizar mochila de embarque (leva na mão, não entrega)</div>
+        <div class="ci-who">Todos · documentos · remédios · roupa de banho · chinelo · carregadores</div>
+      </div>
+    </label>
+
+    <label class="ci" data-id="p16">
+      <input type="checkbox" onchange="markDone(this)">
+      <div>
+        <div class="ci-text">🍽 Reservar restaurante Pianostrada — Roma</div>
+        <div class="ci-who">Lívia · para os dias pós-cruzeiro (07–09/06)</div>
+      </div>
+    </label>
+
+    <label class="ci" data-id="p17">
+      <input type="checkbox" onchange="markDone(this)">
+      <div>
+        <div class="ci-text">🚕 Reservar táxi Trastevere → Fiumicino para madrugada de 09/06 (~02:30)</div>
+        <div class="ci-who">Todos · voo TAP 05:55 — confirmar com antecedência · 45–60 min de trajeto</div>
+      </div>
+    </label>
+
+  </div>
+</section>
+
+<footer>
+  Viagem Itália · Grécia · Turquia 2026 &nbsp;·&nbsp; Gerado em maio/2026 &nbsp;·&nbsp; Grupo: Carlos · Lívia · Ademar · Rosilaine
+</footer>
+
+<script>
+// ── Stars ───────────────────────────────────────────────────────────
+const starsEl = document.getElementById('stars');
+for (let i = 0; i < 120; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  const size = Math.random() * 2.5 + 0.5;
+  s.style.cssText = `
+    left:${Math.random()*100}%;top:${Math.random()*100}%;
+    width:${size}px;height:${size}px;
+    --d:${(Math.random()*4+2).toFixed(1)}s;
+    --delay:-${(Math.random()*4).toFixed(1)}s;
+  `;
+  starsEl.appendChild(s);
+}
+
+// ── Countdown ────────────────────────────────────────────────────────
+function updateCountdown() {
+  const dep = new Date('2026-05-28T17:10:00');
+  const now = new Date();
+  const diff = dep - now;
+  if (diff <= 0) {
+    document.getElementById('cd-d').textContent = 'BON';
+    document.getElementById('cd-h').textContent = 'VOY';
+    document.getElementById('cd-m').textContent = 'AGE';
+    document.getElementById('cd-s').textContent = '🚢';
+    return;
+  }
+  const d = Math.floor(diff / 864e5);
+  const h = Math.floor((diff % 864e5) / 36e5);
+  const m = Math.floor((diff % 36e5) / 6e4);
+  const s = Math.floor((diff % 6e4) / 1e3);
+  document.getElementById('cd-d').textContent = String(d).padStart(2,'0');
+  document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+  document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+// ── Dia a Dia toggle ─────────────────────────────────────────────────
+function toggleDb(head) {
+  const body = head.nextElementSibling;
+  const icon = head.querySelector('.db-toggle');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  icon.classList.toggle('open', !isOpen);
+}
+
+// ── Checklist persistence ────────────────────────────────────────────
+function markDone(cb) {
+  const label = cb.closest('.ci');
+  const id = label.dataset.id;
+  if (cb.checked) {
+    label.classList.add('done');
+  } else {
+    label.classList.remove('done');
+  }
+  const state = {};
+  document.querySelectorAll('.ci input[type=checkbox]').forEach(el => {
+    state[el.closest('.ci').dataset.id] = el.checked;
+  });
+  try { localStorage.setItem('viagem2026-checks', JSON.stringify(state)); } catch(e) {}
+}
+
+// Restore state
+try {
+  const saved = JSON.parse(localStorage.getItem('viagem2026-checks') || '{}');
+  document.querySelectorAll('.ci').forEach(label => {
+    const cb = label.querySelector('input');
+    if (saved[label.dataset.id]) {
+      cb.checked = true;
+      label.classList.add('done');
+    }
+  });
+} catch(e) {}
+
+// ── Smooth nav active ─────────────────────────────────────────────────
+const sections = document.querySelectorAll('section[id], div[id]');
+const navLinks = document.querySelectorAll('nav a');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === '#'+e.target.id ? 'var(--white)' : '';
+        a.style.borderBottomColor = a.getAttribute('href') === '#'+e.target.id ? 'var(--gold)' : '';
+      });
+    }
+  });
+}, { threshold: 0.3 });
+sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
